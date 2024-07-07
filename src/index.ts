@@ -4,8 +4,8 @@ import { renderHtml } from './uiSupport'
 async function GET(req: Request): Promise<Response> {
     const secret = req.queries?.key ?? '';
     const chainbaseApiKey = req.secret?.chainbaseApiKey as string;
-    const chainId = (req.queries.chainId) ? req.queries.chain_id[0] as string : '8453';
-    const contractAddress = (req.queries.contractAddress) ? req.queries.contract_address[0] as string : '0xd343a3f5593b93D8056aB5D60c433622d7D65a80';
+    const chainId = (req.queries.chain_id) ? req.queries.chain_id[0] as string : '8453';
+    const contractAddress = (req.queries.contract_address) ? req.queries.contract_address[0] as string : '0xd343a3f5593b93D8056aB5D60c433622d7D65a80';
     const url = `https://api.chainbase.online/v1/nft/owners?chain_id=${chainId}&contract_address=${contractAddress}`;
     let result;
 
