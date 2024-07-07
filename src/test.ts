@@ -31,35 +31,22 @@ async function test() {
         method: 'GET',
         path: '/ipfs/QmVHbLYhhYA5z6yKpQr4JWr3D54EhbSsh7e7BFAAyrkkMf',
         queries: {
-            chatQuery: ["Who are you?"],
-            openAiModel: ["gpt-4o"]
+            chain_id: ["8453"],
+            contract_address: ["0xd343a3f5593b93D8056aB5D60c433622d7D65a80"]
         },
-        secret: { openaiApiKey: process.env.OPENAI_API_KEY },
+        secret: { chainbaseApiKey: process.env.CHAINBASE_API_KEY },
         headers: {},
     })
     console.log('GET RESULT:', JSON.parse(getResult))
-
-    const postResult = await execute({
-        method: 'POST',
-        path: '/ipfs/QmVHbLYhhYA5z6yKpQr4JWr3D54EhbSsh7e7BFAAyrkkMf',
-        queries: {
-            chatQuery: ["When did humans land on the moon?"],
-            openAiModel: ["gpt-4o"]
-        },
-        secret: { openaiApiKey: process.env.OPENAI_API_KEY },
-        headers: {},
-        body: {}
-    })
-    console.log('POST RESULT:', JSON.parse(postResult))
 
     const testArgsString = JSON.stringify({
         method: 'GET',
         path: '/ipfs/QmVHbLYhhYA5z6yKpQr4JWr3D54EhbSsh7e7BFAAyrkkMf',
         queries: {
-            chatQuery: ["Who are you?"],
-            openAiModel: ["gpt-4o"]
+            chain_id: ["8453"],
+            contract_address: ["0xd343a3f5593b93D8056aB5D60c433622d7D65a80"]
         },
-        secret: { openaiApiKey: "OPENAI_API_KEY" },
+        secret: { chainbaseApiKey: "CHAINBASE_API_KEY" },
         headers: {},
     })
     console.log(`\nTo test in the SideVM playground go to https://phat.phala.network/contracts/view/0xf0a398600f02ea9b47a86c59aed61387e450e2a99cb8b921cd1d46f734e45409\n\nConnect you polkadot.js account and select 'run_js' with the parameters:\n- engine: SidevmQuickJSWithPolyfill\n- js_code: Source code text of dist/index.ts\n- args: ${testArgsString}`);

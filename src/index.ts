@@ -3,31 +3,27 @@ import { renderHtml } from './uiSupport'
 
 async function GET(req: Request): Promise<Response> {
     const secret = req.queries?.key ?? '';
-    const openaiApiKey = req.secret?.openaiApiKey as string;
-    const openAiModel = 'gpt-4o';
-    const query = req.queries.chatQuery[0] as string;
-    let result = '';
+    const chainbaseApiKey = req.secret?.chainbaseApiKey as string;
+    const chainId = (req.queries.chainId) ? req.queries.chain_id[0] as string : '8453';
+    const contractAddress = (req.queries.contractAddress) ? req.queries.contract_address[0] as string : '0xd343a3f5593b93D8056aB5D60c433622d7D65a80';
+    const url = `https://api.chainbase.online/v1/nft/owners?chain_id=${chainId}&contract_address=${contractAddress}`;
+    let result;
 
     try {
-        const response = await fetch('https://api.red-pill.ai/v1/chat/completions', {
-            method: 'POST',
+        const response = await fetch(url, {
+            method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${openaiApiKey}`,
+                'X-Api-Key': `${chainbaseApiKey}`,
             },
-            body: JSON.stringify({
-                messages: [{ role: "user", content: `${query}` }],
-                model: `${openAiModel}`,
-            })
         });
-        const responseData = await response.json();
-        result = responseData.choices[0].message.content as string;
+        result = await response.json();
     } catch (error) {
         console.error('Error fetching chat completion:', error);
         result = error;
     }
 
-    return new Response(renderHtml(result));
+    return new Response(renderHtml(JSON.stringify(result)));
 }
 
 async function POST(req: Request): Promise<Response> {

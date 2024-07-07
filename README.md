@@ -1,22 +1,22 @@
 <div align="center">
   <a href="https://github.com/Phala-Network/ai-agent-template-redpill">
-    <h1>AI Agent Contract Template with RedPill</h1>
+    <h1>AI Agent Contract Template with Chainbase</h1>
     <img height="320" src="./public/AI-Agent-Contract.jpg" />
     <br />
   </a>
-  <a href="https://platform.openai.com/docs/api-reference">
-    <img height="32" src="public/powered-by-openai-badge-filled-on-light.svg" />
+  <a href="https://platform.chainbase.com/docs/api-reference">
+    <img height="32" src="public/powered-by-chainbase-badge-filled-on-light.svg" />
     <br />
   </a>
   <p align="center">
     Host your AI Agent Contract on Phala's decentralized serverless cloud.
     <br />
-    <a href="https://github.com/Phala-Network/ai-agent-template-redpill"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/Phala-Network/ai-agent-template-chainbase"><strong>Explore the docs »</strong></a>
     <br />
     <br />
     <a href="QmQu9AmBL13tyGpxgg5ASt96WQ669p63rnJRWiAo9st8ns/0?key=c0c0105ba56276cd&chatQuery=When%20did%20humans%20land%20on%20the%20moon">View Demo</a>
     ·
-    <a href="https://github.com/Phala-Network/ai-agent-template-redpill/issues">Report Bug</a>
+    <a href="https://github.com/Phala-Network/ai-agent-template-chainbase/issues">Report Bug</a>
     ·
     <a href="https://discord.gg/DXGGJajW">Discord</a>
   </p>
@@ -31,7 +31,7 @@
   <img height="240" src="https://www.jlwranglerforums.com/forum/attachments/zoolander-gif.325299/">
 </div>
 
-The RedPill AI Agent template is a **MINIMAL** template to build an AI Agent that can be hosted on Phala Network's decentralized hosting protocol. Unlike Vercel or other FaaS, it allows you to publish your AI Agent compiled code to IPFS and hosts it on a fully decentralized FaaS cloud with the following benefits:
+The Chainbase AI Agent template is a **MINIMAL** template to build an AI Agent that can be hosted on Phala Network's decentralized hosting protocol. Unlike Vercel or other FaaS, it allows you to publish your AI Agent compiled code to IPFS and hosts it on a fully decentralized FaaS cloud with the following benefits:
 
 - 💨 Ship Fast: Build and ship with familiar toolchain in minutes
 - ⛑️ Secure: Execution guarded by rock solid TEE / Intel SGX
@@ -48,18 +48,18 @@ npm install
 ```
 
 ### Testing Locally
-Create `.env` file and add your RedPill API Key
+Create `.env` file and add your Chainbase API Key
 ```shell
-cp .env.local .env
+cp .env.example .env
 ```
-Get an OpenAI API Key from Redpill
-> Go to https://red-pill.ai/dashboard and claim your OpenAI API Key by swapping some ETH for wGPT at https://app.uniswap.org/explore/tokens/base/0x74F62Bc1961028C22b8080961c6534f4eDD49D6C
+Get an Chainbase API Key from Chainbase
+> Go to https://red-pill.ai/dashboard and claim your Chainbase API Key by swapping some ETH for wGPT at https://app.uniswap.org/explore/tokens/base/0x74F62Bc1961028C22b8080961c6534f4eDD49D6C
 >
 > Video: https://youtu.be/ZoJwbLNhbWE
 
-In `.env` file replace `YOUR_OPENAI_KEY` with your API Key
+In `.env` file replace `YOUR_CHAINBASE_KEY` with your API Key
 ```text
-OPENAI_API_KEY="YOUR_OPENAI_KEY"
+CHAINBASE_API_KEY="YOUR_CHAINBASE_KEY"
 ```
 
 Build your Agent
@@ -74,7 +74,7 @@ npm run test
 
 Expected Test Results
 ```shell
-INPUT: {"method":"GET","path":"/ipfs/QmVHbLYhhYA5z6yKpQr4JWr3D54EhbSsh7e7BFAAyrkkMf","queries":{"chatQuery":["Who are you?"]},"secret":{"openaiApiKey":"YOUR_OPENAI_KEY"},"headers":{}}
+INPUT: {"method":"GET","path":"/ipfs/QmVHbLYhhYA5z6yKpQr4JWr3D54EhbSsh7e7BFAAyrkkMf","queries":{"chatQuery":["Who are you?"]},"secret":{"chainbaseApiKey":"YOUR_CHAINBASE_KEY"},"headers":{}}
 GET RESULT: {
   status: 200,
   body: '\n' +
@@ -97,7 +97,7 @@ GET RESULT: {
 }
 
 
-INPUT: {"method":"POST","path":"/ipfs/QmVHbLYhhYA5z6yKpQr4JWr3D54EhbSsh7e7BFAAyrkkMf","queries":{"chatQuery":["When did humans land on the moon?"]},"secret":{"openaiApiKey":"YOUR_OPENAI_KEY"},"headers":{},"body":"{\"untrustedData\":{\"fid\":2,\"url\":\"https://fcpolls.com/polls/1\",\"messageHash\":\"0xd2b1ddc6c88e865a33cb1a565e0058d757042974\",\"timestamp\":1706243218,\"network\":1,\"buttonIndex\":2,\"castId\":{\"fid\":226,\"hash\":\"0xa48dd46161d8e57725f5e26e34ec19c13ff7f3b9\"}},\"trustedData\":{\"messageBytes\":\"d2b1ddc6c88e865a33cb1a565e0058d757042974...\"}}"}
+INPUT: {"method":"POST","path":"/ipfs/QmVHbLYhhYA5z6yKpQr4JWr3D54EhbSsh7e7BFAAyrkkMf","queries":{"chatQuery":["When did humans land on the moon?"]},"secret":{"chainbaseApiKey":"YOUR_CHAINBASE_KEY"},"headers":{},"body":"{\"untrustedData\":{\"fid\":2,\"url\":\"https://fcpolls.com/polls/1\",\"messageHash\":\"0xd2b1ddc6c88e865a33cb1a565e0058d757042974\",\"timestamp\":1706243218,\"network\":1,\"buttonIndex\":2,\"castId\":{\"fid\":226,\"hash\":\"0xa48dd46161d8e57725f5e26e34ec19c13ff7f3b9\"}},\"trustedData\":{\"messageBytes\":\"d2b1ddc6c88e865a33cb1a565e0058d757042974...\"}}"}
 POST RESULT: {
   status: 200,
   body: 'Not Implemented',
@@ -112,7 +112,7 @@ To test in the SideVM playground go to https://phat.phala.network/contracts/view
 Connect you polkadot.js account and select 'run_js' with the parameters:
 - engine: SidevmQuickJSWithPolyfill
 - js_code: Source code text of dist/index.ts
-- args: {"method":"GET","path":"/ipfs/QmVHbLYhhYA5z6yKpQr4JWr3D54EhbSsh7e7BFAAyrkkMf","queries":{"chatQuery":["Who are you?"],"openAiModel":["gpt-4o"]},"secret":{"openaiApiKey":"OPENAI_API_KEY"},"headers":{}}
+- args: {"method":"GET","path":"/ipfs/QmVHbLYhhYA5z6yKpQr4JWr3D54EhbSsh7e7BFAAyrkkMf","queries":{"chatQuery":["Who are you?"],"openAiModel":["gpt-4o"]},"secret":{"chainbaseApiKey":"CHAINBASE_API_KEY"},"headers":{}}
 Watch video here for to see the visual steps of testing in Sidevm playground: https://www.youtube.com/watch?v=fNqNeLfFFME
 
 Make sure to replace queries and secret with your values compatible with your AI Agent Contract.
@@ -154,7 +154,7 @@ AI Agent Contract deployed at: https://agents.phala.network/ipfs/QmcpWsiZq8RP7C8
 Make sure to add your secrets to ensure your AI-Agent works properly. Use syntax:
 
 
-curl https://agents.phala.network/vaults -H 'Content-Type: application/json' -d '{"cid": "QmcpWsiZq8RP7C823HdXT9EAhg9XUtuZ7FA6a1mHkNbRVQ", "data": {"openaiApiKey": "OPENAI_API_KEY"}}'
+curl https://agents.phala.network/vaults -H 'Content-Type: application/json' -d '{"cid": "QmcpWsiZq8RP7C823HdXT9EAhg9XUtuZ7FA6a1mHkNbRVQ", "data": {"chainbaseApiKey": "CHAINBASE_API_KEY"}}'
 ```
 
 <details>
@@ -188,28 +188,28 @@ By default, all the compiled JS code is visible for anyone to view if they look 
 <details>
 <summary><b>How to Add Secrets</b></summary>
 
-The steps to add a `secret` is simple. We will add the [OpenAI](https://platform.openai.com/docs/quickstart?context=node) API Key in this example by creating a secret JSON object with the `openaiApiKey`:
+The steps to add a `secret` is simple. We will add the [Chainbase](https://console.chainbase.com/) API Key in this example by creating a secret JSON object with the `chainbaseApiKey`:
 
 ```json
-{"openaiApiKey": "<OPENAI_API_KEY>"}
+{"chainbaseApiKey": "<CHAINBASE_API_KEY>"}
 ```
 
 Then in your frame code, you will be able to access the secret key via `req.secret` object:
 
 ```js
 async function GET(req: Request): Promise<Response> {
-    const apiKey = req.secret?.openaiApiKey
+    const apiKey = req.secret?.chainbaseApiKey
 }
 ```
 
 > **Note**: Before continuing, make sure to publish your compiled AI Agent JS code, so you can add secrets to the CID.
 
 **Open terminal**
-Use `curl` to `POST` your secrets to `https://agents.phala.network/vaults`. Replace `IPFS_CID` with the CID to the compile JS code in IPFS, and replace `<OPENAI_API_KEY>` with your OpenAI API key. Note that you can name the secret field name something other than `openaiApiKey`, but you will need to access the key in your `index.ts` file with the syntax `req.secret?.<your-secret-field-name> as string`
+Use `curl` to `POST` your secrets to `https://agents.phala.network/vaults`. Replace `IPFS_CID` with the CID to the compile JS code in IPFS, and replace `<CHAINBASE_API_KEY>` with your Chainbase API key. Note that you can name the secret field name something other than `chainbaseApiKey`, but you will need to access the key in your `index.ts` file with the syntax `req.secret?.<your-secret-field-name> as string`
 
 The command will look like this:
 ```shell
-curl https://agents.phala.network/vaults -H 'Content-Type: application/json' -d '{"cid": "IPFS_CID", "data": {"openaiApiKey": "<OPENAI_API_KEY>"}}'
+curl https://agents.phala.network/vaults -H 'Content-Type: application/json' -d '{"cid": "IPFS_CID", "data": {"chainbaseApiKey": "<CHAINBASE_API_KEY>"}}'
 # Output:
 # {"token":"e85ae53d2ba4ca8d","key":"e781ef31210e0362","succeed":true}
 ```
@@ -223,7 +223,7 @@ curl https://agents.phala.network/vaults/<key>/<token>
 
 Expected output:
 ```shell
-{"data":{"openaiApiKey":"<OPENAI_API_KEY>"},"succeed":true}
+{"data":{"chainbaseApiKey":"<CHAINBASE_API_KEY>"},"succeed":true}
 ```
 
 If you are using secrets, make sure that your URL is set in the following syntax where `cid` is the IPFS CID of your compiled JS file and `key` is the `key` from adding secrets to your vault.
