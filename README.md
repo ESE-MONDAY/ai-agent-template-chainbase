@@ -1,11 +1,7 @@
 <div align="center">
-  <a href="https://github.com/Phala-Network/ai-agent-template-redpill">
+  <a href="https://github.com/Phala-Network/ai-agent-template-chainbase">
     <h1>AI Agent Contract Template with Chainbase</h1>
     <img height="320" src="./public/AI-Agent-Contract.jpg" />
-    <br />
-  </a>
-  <a href="https://platform.chainbase.com/docs/api-reference">
-    <img height="32" src="public/powered-by-chainbase-badge-filled-on-light.svg" />
     <br />
   </a>
   <p align="center">
@@ -14,11 +10,11 @@
     <a href="https://github.com/Phala-Network/ai-agent-template-chainbase"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="QmQu9AmBL13tyGpxgg5ASt96WQ669p63rnJRWiAo9st8ns/0?key=c0c0105ba56276cd&chatQuery=When%20did%20humans%20land%20on%20the%20moon">View Demo</a>
+    <a href="https://wapo-testnet.phala.network/ipfs/QmfZ4ApCnoDGCxwxp7Taax1tzGY9Vbu4YQFnkrKmu4yNd7?key=4622c3e3fc0fc307&chain_id=8453&contract_address=0xd343a3f5593b93D8056aB5D60c433622d7D65a80">View Demo</a>
     ·
     <a href="https://github.com/Phala-Network/ai-agent-template-chainbase/issues">Report Bug</a>
     ·
-    <a href="https://discord.gg/DXGGJajW">Discord</a>
+    <a href="https://discord.gg/phala-network">Discord</a>
   </p>
 
   <h3>Architecure Overview</h3>
@@ -52,10 +48,8 @@ Create `.env` file and add your Chainbase API Key
 ```shell
 cp .env.example .env
 ```
-Get an Chainbase API Key from Chainbase
-> Go to https://red-pill.ai/dashboard and claim your Chainbase API Key by swapping some ETH for wGPT at https://app.uniswap.org/explore/tokens/base/0x74F62Bc1961028C22b8080961c6534f4eDD49D6C
->
-> Video: https://youtu.be/ZoJwbLNhbWE
+
+Get a Chainbase API Key from [Chainbase](https://console.chainbase.com/)
 
 In `.env` file replace `YOUR_CHAINBASE_KEY` with your API Key
 ```text
@@ -74,48 +68,19 @@ npm run test
 
 Expected Test Results
 ```shell
-INPUT: {"method":"GET","path":"/ipfs/QmVHbLYhhYA5z6yKpQr4JWr3D54EhbSsh7e7BFAAyrkkMf","queries":{"chatQuery":["Who are you?"]},"secret":{"chainbaseApiKey":"YOUR_CHAINBASE_KEY"},"headers":{}}
+INPUT: {"method":"GET","path":"/ipfs/CID","queries":{"chain_id":["8453"],"contract_address":["0xd343a3f5593b93D8056aB5D60c433622d7D65a80"]},"secret":{"chainbaseApiKey":"CHAINBASE_API_KEY"},"headers":{}}
 GET RESULT: {
   status: 200,
-  body: '\n' +
-    '    <!DOCTYPE html>\n' +
-    '    <html lang="en">\n' +
-    '        <head>\n' +
-    '            <meta charset="utf-8" />\n' +
-    '            <title>TestUI</title>\n' +
-    '        </head>\n' +
-    '        <body>\n' +
-    '            <div align="center">\n' +
-    '                <p>I am an AI-powered digital assistant here to help answer your questions and assist you with various tasks. How can I assist you today?</p>\n' +
-    '            </div>\n' +
-    '        </body>\n' +
-    '    </html>',
+  body: '{"code":0,"message":"ok","data":[{"address":"0xc77b7e6176eaa80aa15fa11b2f14d9773772cb0f","total":255},{"address":"0xdd2363cbfaabb9c68e0a74a6a5ac2478cc9e9c8f","total":190},{"address":"0x0ebd2fa40bb998a9462a18ac17254458b065712a","total":98},{"address":"0x3227547eb6b8679f19c84af5619a934ee0a6af68","total":69},{"address":"0x7f2281facde2f04b4af8cae396eea24fe18f5c42","total":23},{"address":"0x12909009d651d40d6ae00b150db3107bc5654603","total":20},{"address":"0xde1683287529b9b4c3132af8aad210644b259cfd","total":19},{"address":"0x329539a0338c643be39e2c53c93b64ea1d0f9095","total":18},{"address":"0x015359e5404fc97a5f2631986613fd85c88eaa41","total":16},{"address":"0x3d19777f46c739c6fd921e0fe3ebc65de003a353","total":13},{"address":"0x7ecdf3fd56d3b9f512fa70a68734ce871e36be96","total":12},{"address":"0xe92d559f99857114c610abef473c31be38e4a08b","total":12},{"address":"0x94c74dfa070500e317ddde4d64007fe26ae8ab9a","total":11},{"address":"0xfb63ed4dc5467ddb608e0a5b3f441a82e6603c40","total":10},{"address":"0x9365b6915e8e57c29490db9c4c11674419d9b1db","total":9},{"address":"0x75daae02fe35c114d32ad8e3b2555fe9798a64b0","total":8},{"address":"0x10276757bea9474fd3764bb1301aea5c7c7c9d6e","total":7},{"address":"0x8cea81b7f23a0f56cd98a76cc9a82f2970ba1f7e","total":7},{"address":"0x9325564ade7683706107685cf1993678b1163261","total":6},{"address":"0xe69ebd3f7734a30e338e78f88947cc2360f86d03","total":6}],"next_page":2,"count":86}',
   headers: {
-    'Content-Type': 'text/html; charset=UTF-8',
+    'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': '*'
   }
 }
+**NOTE**:
+This is a local test and your published code could have a different result when executing in the TEE on Phala Network.
 
-
-INPUT: {"method":"POST","path":"/ipfs/QmVHbLYhhYA5z6yKpQr4JWr3D54EhbSsh7e7BFAAyrkkMf","queries":{"chatQuery":["When did humans land on the moon?"]},"secret":{"chainbaseApiKey":"YOUR_CHAINBASE_KEY"},"headers":{},"body":"{\"untrustedData\":{\"fid\":2,\"url\":\"https://fcpolls.com/polls/1\",\"messageHash\":\"0xd2b1ddc6c88e865a33cb1a565e0058d757042974\",\"timestamp\":1706243218,\"network\":1,\"buttonIndex\":2,\"castId\":{\"fid\":226,\"hash\":\"0xa48dd46161d8e57725f5e26e34ec19c13ff7f3b9\"}},\"trustedData\":{\"messageBytes\":\"d2b1ddc6c88e865a33cb1a565e0058d757042974...\"}}"}
-POST RESULT: {
-  status: 200,
-  body: 'Not Implemented',
-  headers: {
-    'Content-Type': 'text/html; charset=UTF-8',
-    'Access-Control-Allow-Origin': '*'
-  }
-}
-
-To test in the SideVM playground go to https://phat.phala.network/contracts/view/0xf0a398600f02ea9b47a86c59aed61387e450e2a99cb8b921cd1d46f734e45409
-
-Connect you polkadot.js account and select 'run_js' with the parameters:
-- engine: SidevmQuickJSWithPolyfill
-- js_code: Source code text of dist/index.ts
-- args: {"method":"GET","path":"/ipfs/QmVHbLYhhYA5z6yKpQr4JWr3D54EhbSsh7e7BFAAyrkkMf","queries":{"chatQuery":["Who are you?"],"openAiModel":["gpt-4o"]},"secret":{"chainbaseApiKey":"CHAINBASE_API_KEY"},"headers":{}}
-Watch video here for to see the visual steps of testing in Sidevm playground: https://www.youtube.com/watch?v=fNqNeLfFFME
-
-Make sure to replace queries and secret with your values compatible with your AI Agent Contract.
+Please reach out to the team here if your run into issues: https://discord.gg/phala-network
 ```
 
 ### Publish Your AI Agent
@@ -128,7 +93,7 @@ npm run publish-agent
 Upon a successful upload, the command should show the URL to access your AI Agent.
 ```shell
 ✓ Compiled successfully.
-  1.91 KB  dist/index.js
+  1.39 KB  dist/index.js
 Running command: npx thirdweb upload dist/index.js
 This may require you to log into thirdweb and will take some time to publish to IPFS...
 
@@ -146,15 +111,15 @@ This may require you to log into thirdweb and will take some time to publish to 
 - Uploading file to IPFS. This may take a while depending on file sizes.
 
 ✔ Successfully uploaded file to IPFS.
-✔ Files stored at the following IPFS URI: ipfs://QmcpWsiZq8RP7C823HdXT9EAhg9XUtuZ7FA6a1mHkNbRVQ
-✔ Open this link to view your upload: https://bafybeigxe4cxpg2nz4ueoiu6edkyttvj3gjkvoht4szl7kktjxftkzcxj4.ipfs.cf-ipfs.com/
+✔ Files stored at the following IPFS URI: ipfs://QmfZ4ApCnoDGCxwxp7Taax1tzGY9Vbu4YQFnkrKmu4yNd7
+✔ Open this link to view your upload: https://b805a9b72767504353244e0422c2b5f9.ipfscdn.io/ipfs/bafybeih7yqwj7eldyy7sdctrv7vltaslbd577nuwqu3ogrf66shps3btsi/
 
-AI Agent Contract deployed at: https://agents.phala.network/ipfs/QmcpWsiZq8RP7C823HdXT9EAhg9XUtuZ7FA6a1mHkNbRVQ
+Agent Contract deployed at: https://wapo-testnet.phala.network/ipfs/QmfZ4ApCnoDGCxwxp7Taax1tzGY9Vbu4YQFnkrKmu4yNd7
 
-Make sure to add your secrets to ensure your AI-Agent works properly. Use syntax:
-
-
-curl https://agents.phala.network/vaults -H 'Content-Type: application/json' -d '{"cid": "QmcpWsiZq8RP7C823HdXT9EAhg9XUtuZ7FA6a1mHkNbRVQ", "data": {"chainbaseApiKey": "CHAINBASE_API_KEY"}}'
+If your agent requires secrets, ensure to do the following:
+1) Edit the setSecrets.ts file to add your secrets
+2) Set the variable AGENT_CID=QmfZ4ApCnoDGCxwxp7Taax1tzGY9Vbu4YQFnkrKmu4yNd7 in the .env file
+3) Run command: npm run set-secrets
 ```
 
 <details>
@@ -164,61 +129,58 @@ We use <a href="https://thirdweb.com/dashboard/infrastructure/storage">thirdweb 
 
 <details>
 <summary>Did thirdweb fail to publish?</summary>
-If thirdweb takes too long to install or fails to publish, use the following command:
-
-```shell
-curl -F file=@./dist/index.js https://agents.phala.network/ipfs 
-```
+If ThirdWeb fails to publish, please use any IPFS pinning service to publish your Agent Contract.
 </details>
 
 ### Access the Published AI Agent
 
-Once published, your AI Agent is available at the URL: `https://agents.phala.network/ipfs/<your-cid>`. You can get it from the "Publish to IPFS" step.
+Once published, your AI Agent is available at the URL: `https://wapo-testnet.phala.network/ipfs/<your-cid>`. You can get it from the "Publish to IPFS" step.
 
 You can test it with `curl`.
 
 ```bash
-curl https://agents.phala.network/ipfs/<your-cid>
+curl https://wapo-testnet.phala.network/ipfs/<your-cid>
 ```
 
 ### Add Secrets
 
 By default, all the compiled JS code is visible for anyone to view if they look at IPFS CID. This makes private info like API keys, signer keys, etc. vulnerable to be stolen. To protect devs from leaking keys, we have added a field called `secret` in the `Request` object. It allows you to store secrets in a vault for your AI Agent to access.
 
-<details>
-<summary><b>How to Add Secrets</b></summary>
-
-The steps to add a `secret` is simple. We will add the [Chainbase](https://console.chainbase.com/) API Key in this example by creating a secret JSON object with the `chainbaseApiKey`:
-
-```json
-{"chainbaseApiKey": "<CHAINBASE_API_KEY>"}
+To add your secrets,
+1) edit the [setSecrets.ts](./scripts/setSecrets.ts) file and update the `secrets` variable at the top of the file
+```typescript
+// Update your key value JSON object here for your secrets
+const secrets = JSON.stringify({
+  // Add your secrets here
+  // key: value
+  chainbaseApiKey: process.env.CHAINBASE_API_KEY
+})
 ```
-
-Then in your frame code, you will be able to access the secret key via `req.secret` object:
-
-```js
-async function GET(req: Request): Promise<Response> {
-    const apiKey = req.secret?.chainbaseApiKey
-}
+2) Update the [.env](./.env.example) file with your published agent IPFS CID
+```text
+AGENT_CID=QmfZ4ApCnoDGCxwxp7Taax1tzGY9Vbu4YQFnkrKmu4yNd7
 ```
-
-> **Note**: Before continuing, make sure to publish your compiled AI Agent JS code, so you can add secrets to the CID.
-
-**Open terminal**
-Use `curl` to `POST` your secrets to `https://agents.phala.network/vaults`. Replace `IPFS_CID` with the CID to the compile JS code in IPFS, and replace `<CHAINBASE_API_KEY>` with your Chainbase API key. Note that you can name the secret field name something other than `chainbaseApiKey`, but you will need to access the key in your `index.ts` file with the syntax `req.secret?.<your-secret-field-name> as string`
-
-The command will look like this:
+3) Run command to set the secrets
 ```shell
-curl https://agents.phala.network/vaults -H 'Content-Type: application/json' -d '{"cid": "IPFS_CID", "data": {"chainbaseApiKey": "<CHAINBASE_API_KEY>"}}'
-# Output:
-# {"token":"e85ae53d2ba4ca8d","key":"e781ef31210e0362","succeed":true}
+npm run set-secrets
+```
+Expected output:
+```shell
+Storing secrets...
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   184    0    68  100   116    118    202 --:--:-- --:--:-- --:--:--   321
+{"token":"a6373db0d1f13078","key":"4622c3e3fc0fc307","succeed":true}
+
+Secrets set successfully. Go to the URL below to interact with your agent:
+https://wapo-testnet.phala.network/ipfs/QmfZ4ApCnoDGCxwxp7Taax1tzGY9Vbu4YQFnkrKmu4yNd7?key=4622c3e3fc0fc307
 ```
 
 The API returns a `token` and a `key`. The `key` is the id of your secret. It can be used to specify which secret you are going to pass to your frame. The `token` can be used by the developer to access the raw secret. You should never leak the `token`.
 
 To verify the secret, run the following command where `key` and `token` are replaced with the values from adding your `secret` to the vault.
 ```shell
-curl https://agents.phala.network/vaults/<key>/<token>
+curl https://wapo-testnet.phala.network/vaults/<key>/<token>
 ```
 
 Expected output:
@@ -226,22 +188,12 @@ Expected output:
 {"data":{"chainbaseApiKey":"<CHAINBASE_API_KEY>"},"succeed":true}
 ```
 
-If you are using secrets, make sure that your URL is set in the following syntax where `cid` is the IPFS CID of your compiled JS file and `key` is the `key` from adding secrets to your vault.
-```text
-https://agents.phala.network/ipfs/<cid>?key=<key>
-```
-
-Example:
-https://agents.phala.network/ipfs/Qma2WjqWqW8wYG2tEQ9YFUgyVrMDA9VzvkkdeFny7Smn3R/0?key=686df81d326fa5f2&chatQuery=When%20did%20humans%20land%20on%20the%20moon
-
-</details>
-
 ### Access Queries
 To help create custom logic, we have an array variable named `queries` that can be accessed in the `Request` class. To access the `queries` array variable `chatQuery` value at index `0`, the syntax will look as follows:
 ```typescript
 const query = req.queries.chatQuery[0] as string;
 ```
-The example at https://agents.phala.network/ipfs/Qma2WjqWqW8wYG2tEQ9YFUgyVrMDA9VzvkkdeFny7Smn3R/0?key=686df81d326fa5f2&chatQuery=When%20did%20humans%20land%20on%20the%20moon will have a value of `When did humans land on the moon`. `queries` can have any field name, so `chatQuery` is just an example of a field name and not a mandatory name, but remember to update your `index.ts` file logic to use your expected field name.
+The example at https://wapo-testnet.phala.network/ipfs/QmfZ4ApCnoDGCxwxp7Taax1tzGY9Vbu4YQFnkrKmu4yNd7?key=4622c3e3fc0fc307&chain_id=8453&contract_address=0xd343a3f5593b93D8056aB5D60c433622d7D65a80 will have a queries for `chain_id` and `contract_address` with values of `8453` and `0xd343a3f5593b93D8056aB5D60c433622d7D65a80`. `queries` can have any field name, so `chain_id` & `contract_address` are just an example of a field names and not a mandatory name, but remember to update your `index.ts` file logic to use your expected field name.
 
 
 ## FAQ
@@ -252,8 +204,7 @@ The example at https://agents.phala.network/ipfs/Qma2WjqWqW8wYG2tEQ9YFUgyVrMDA9V
   <li>Most of the npm packages are supported: viem, onchainkit, ….</li>
   <li>Some packages with some advanced features are not supported:</li>
   <ul>
-    <li>Large code size. Compiled bundle should be less than 500kb.</li>
-    <li>Large memory usage, like image generation</li>
+    <li>Memory usage over 100MB</li>
     <li>Web Assembly</li>
     <li>Browser only features: local storage, service workers, etc</li>
   </ul>
@@ -265,13 +216,7 @@ The example at https://agents.phala.network/ipfs/Qma2WjqWqW8wYG2tEQ9YFUgyVrMDA9V
 <ul>
   <li>The code runs inside a tailored <a href="https://bellard.org/quickjs/">QuickJS engine</a></li>
   <li>Available features: ES2023, async, fetch, setTimeout, setInterval, bigint</li>
-  <li>Resource limits</li>
-  <ul>
-    <li>Max execution time ~30s</li>
-    <li>Max memory usage: 16 mb</li>
-    <li>Max code size: 500 kb</li>
-    <li>Limited CPU burst: CPU time between async calls is limited. e.g. Too complex for-loop may hit the burst limit.</li>
-  </ul>
+  <li> <a href="https://docs.phala.network/tech-specs/ai-agent-contract#wapojs/">Tech spec doc</a></li>
 </ul>
 </details>
 
