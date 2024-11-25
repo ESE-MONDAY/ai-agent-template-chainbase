@@ -10,7 +10,7 @@ async function test() {
             chain_id: ["8453"],
             contract_address: ["0xd343a3f5593b93D8056aB5D60c433622d7D65a80"]
         },
-        secret: { chainbaseApiKey: '2oz2ltH0h6tt5ZttwqXS4IXtxXo' },
+        secret: { chainbaseApiKey: 'YOUR_CHAINBASE_KEY' },
         headers: {},
     })
     console.log('GET RESULT:', JSON.parse(getResult))
