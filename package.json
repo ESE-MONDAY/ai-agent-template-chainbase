@@ -23,5 +23,7 @@
     "typescript": "^5.3.3",
     "wyhash": "^1.0.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "hono": "^4.6.11"
+  }
 }

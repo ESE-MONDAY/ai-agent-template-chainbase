@@ -1,6 +1,6 @@
 import 'dotenv/config'
 import './testSupport'
-import {execute} from "./testSupport";
+import { execute } from "./testSupport";
 
 async function test() {
     let getResult = await execute({
@@ -10,7 +10,7 @@ async function test() {
             chain_id: ["8453"],
             contract_address: ["0xd343a3f5593b93D8056aB5D60c433622d7D65a80"]
         },
-        secret: { chainbaseApiKey: 'CHAINBASE_API_KEY' },
+        secret: { chainbaseApiKey: '2oz2ltH0h6tt5ZttwqXS4IXtxXo' },
         headers: {},
     })
     console.log('GET RESULT:', JSON.parse(getResult))
