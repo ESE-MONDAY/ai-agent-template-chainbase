@@ -1,59 +1,115 @@
-import 'dotenv/config'
-import { describe, test, expect, vi } from 'vitest'
-import app from '../src' // Path to your Hono app
+import { describe, it, expect, vi, beforeEach } from 'vitest'
+import main from '../src'
+import { app } from '../src'
+import { ChainbaseResponse } from '../src'
 
+// Mock the fetch function
+const mockFetch = vi.fn()
+global.fetch = mockFetch
 
-// export async function execute(inputObj: any) {
-//     const inputJson = JSON.stringify(inputObj)
-//     console.log('INPUT:', inputJson)
-//     return await main(inputJson)
-// }
+// Mock process.env
+const mockEnv = {
+    secret: JSON.stringify({
+        chainbaseApiKey: 'test-api-key'
+    }),
+    CHAINBASE_API_KEY: 'test-api-key'
+}
 
-// async function test() {
-//     let getResult = await execute({
-//         method: 'GET',
-//         path: '/ipfs/CID',
-//         queries: {
-//             chain_id: ["8453"],
-//             contract_address: ["0xd343a3f5593b93D8056aB5D60c433622d7D65a80"]
-//         },
-//         secret: { chainbaseApiKey: '2oz2ltH0h6tt5ZttwqXS4IXtxXo' },
-//         headers: {},
-//     })
-//     console.log('GET RESULT:', JSON.parse(getResult))
+vi.stubGlobal('process', { env: mockEnv })
 
-//     console.log(`Now you are ready to publish your agent, add secrets, and interact with your agent in the following steps:\n- Execute: 'npm run publish-agent'\n- Set secrets: 'npm run set-secrets'\n- Go to the url produced by setting the secrets (e.g. https://wapo-testnet.phala.network/ipfs/QmPQJD5zv3cYDRM25uGAVjLvXGNyQf9Vonz7rqkQB52Jae?key=b092532592cbd0cf)`)
-// }
+describe('NFT Owners API', () => {
+    beforeEach(() => {
+        mockFetch.mockClear()
+    })
 
-// test().then(() => { }).catch(err => console.error(err)).finally(() => process.exit())
+    it('should handle Phala agent request successfully', async () => {
+        const mockResponse: ChainbaseResponse = {
+            code: 0,
+            message: 'success',
+            data: [{ address: '0x123...', total: 1 }],
+            next_page: 2,
+            count: 1
+        }
 
-
-
-
-// Mock the secret API key for testing purposes
-vi.stubEnv('CHAINBASE_API_KEY', '2oz2ltH0h6tt5ZttwqXS4IXtxXo')
-
-describe('Test Chainbase API Integration', () => {
-    test('GET request returns expected HTML', async () => {
-        // Simulate a GET request to the / route with query parameters
-        const resp = await app.request('/?chain_id=8453&contract_address=0xd343a3f5593b93D8056aB5D60c433622d7D65a80', {
-            secrets: { chainbaseApiKey: '2oz2ltH0h6tt5ZttwqXS4IXtxXo' }, // Passing secret as part of the request
+        mockFetch.mockResolvedValueOnce({
+            ok: true,
+            json: () => Promise.resolve(mockResponse)
         })
-        console.log(resp)
 
-        // Assert the response status is 200 (OK)
-        expect(resp.status).toBe(200)
+        const input = {
+            method: 'GET',
+            queries: {
+                chain_id: ['8453'],
+                contract_address: ['0xd343a3f5593b93D8056aB5D60c433622d7D65a80']
+            },
+            secret: { chainbaseApiKey: 'test-api-key' }
+        }
 
-        // Assert that the response content type is HTML
-        expect(resp.headers.get('content-type')?.toLowerCase()).toBe('text/html; charset=utf-8')
+        const result = await main(JSON.stringify(input))
+        const parsedResult = JSON.parse(result)
 
-        // Get the HTML response body
-        const html = await resp.text()
+        expect(parsedResult.status).toBe(200)
+        expect(parsedResult.headers['content-type']).toContain('text/html')
+        expect(parsedResult.body).toContain('Chainbase NFT Owners')
+        expect(parsedResult.body).toContain('0x123...')
+    })
 
-        // Assert that the HTML contains certain fields and the expected content
-        expect(html).toContain('<div class="field">')
-        expect(html).toContain('Chain ID:')
-        expect(html).toContain('Contract Address:')
-        expect(html).toContain('Response:')
+    it('should handle Phala agent API errors', async () => {
+        mockFetch.mockResolvedValueOnce({
+            ok: false,
+            json: () => Promise.resolve({ error: 'Invalid API key' })
+        })
+
+        const input = {
+            method: 'GET',
+            queries: {},
+            secret: { chainbaseApiKey: 'invalid-key' }
+        }
+
+        const result = await main(JSON.stringify(input))
+        const parsedResult = JSON.parse(result)
+
+        expect(parsedResult.status).toBe(200)
+        expect(parsedResult.body).toContain('Invalid API key')
+    })
+
+    it('should handle Phala agent non-GET requests', async () => {
+        const input = {
+            method: 'POST',
+            queries: {},
+            secret: { chainbaseApiKey: 'test-api-key' }
+        }
+
+        const result = await main(JSON.stringify(input))
+        const parsedResult = JSON.parse(result)
+
+        expect(parsedResult.status).toBe(501)
+        expect(parsedResult.body).toBe('Not Implemented')
+    })
+
+    // Hono app tests
+    it('should handle Hono app request', async () => {
+        const mockResponse: ChainbaseResponse = {
+            code: 0,
+            message: 'success',
+            data: [{ address: '0x123...', total: 1 }],
+            next_page: 2,
+            count: 1
+        }
+
+        mockFetch.mockResolvedValueOnce({
+            ok: true,
+            json: () => Promise.resolve(mockResponse)
+        })
+
+        const res = await app.request('/')
+        expect(res.status).toBe(200)
+        expect(res.headers.get('content-type')).toContain('text/html')
+    })
+
+    it('should handle Hono app 404 routes', async () => {
+        const res = await app.request('/invalid-route')
+        expect(res.status).toBe(501)
+        expect(await res.text()).toBe('Not Implemented')
     })
 })
